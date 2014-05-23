@@ -50,21 +50,25 @@ Controllers extend Backbone.Events. This gives them access to the Backbone.Event
 are the list of TriggerMethods fired by the Controller Class.
  
 ##### `before:add:region`  
+Callback: `onBeforeAddRegion`  
 Arguments: `regionName`, `region`
 
 Triggered just before a `region` is added.
 
 ##### `add:region`  
+Callback: `onAddRegion`  
 Arguments: `regionName`, `region`
 
 Triggered just after a `region` is added.
 
 ##### `before:remove:region`  
+Callback: `onBeforeRemoveRegion`  
 Arguments: `regionName`, `region`
 
 Triggered just before a `region` is removed.
 
 ##### `remove:region`  
+Callback: `onRemoveRegion`  
 Arguments: `regionName`, `region`
 
 Triggered just after a `region` is removed.

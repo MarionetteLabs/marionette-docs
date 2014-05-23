@@ -55,6 +55,7 @@ Controllers extend Backbone.Events. This gives them access to the Backbone.Event
 are the list of TriggerMethods fired by the Controller Class.
  
 ##### `destroy`  
+Callback: `onDestroy`  
 Arguments: *The same arguments passed to `close`*
 
 Called when the Controller has been destroyed. The only thing that happens after this

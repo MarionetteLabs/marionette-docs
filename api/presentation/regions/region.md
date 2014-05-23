@@ -59,33 +59,39 @@ Controllers extend Backbone.Events. This gives them access to the Backbone.Event
 are the list of TriggerMethods fired by the Controller Class.
 
 ##### `before:show`  
-Arguments: `view`
+Callback: `onBeforeShow`  
+Arguments: `view`  
 
 Called just before the Region displays `view` in itself.
 
 ##### `show`  
+Callback: `onShow`  
 Arguments: `view`
 
 Called just after the Region displays `view` in itself.
 
 ##### `before:swap`  
+Callback: `onBeforeSwap`  
 Arguments: `newView`
 
 Unlike the `show` triggerMethod this is only triggered when the Region is *already* showing a
 view, and has been told to show `newView`. It is called before the swap happens.
 
 ##### `swap`  
+Callback: `onSwap`  
 Arguments: `newView`
 
 After `newView` has replaced the previous view in the Region, then this will be called. This is only called when a swapping
 of views occurs; `show` is always called, even if the region was previously empty.
 
 ##### `before:empty`  
+Callback: `onBeforeEmpty`  
 Arguments: `currentView`
 
 Triggered just before the `currentView` in the region is destroyed. Passes the about-to-be-destroyed view as an argument.
 
 ##### `empty`  
+Callback: `onEmpty`  
 Arguments: `currentView`
 
 Triggered just after the `currentView` in the region is destroyed. Passes the just-destroyed view as an argument.

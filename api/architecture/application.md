@@ -126,32 +126,38 @@ Applications extend Backbone.Events, giving them access to the Backbone.Events A
 are the list of TriggerMethods fired by the Controller Class.
 
 ##### `before:start`  
+Callback: `onBeforeStart`  
 Arguments: `options`
 
 Called just before the Application has started. The same options passed to the initializer
 as passed onto the start triggerMethod.
 
 ##### `start`  
+Callback: `onStart`  
 Arguments: `options`
 
 The complement to `before:start`; this is triggered just after the Application starts.
 
 ##### `before:add:region`  
+Callback: `onBeforeAddRegion`  
 Arguments: `regionName`
 
 Called just before a new region is added. The first argument is the name of the new region.
 
 ##### `add:region`  
+Callback: `onAddRegion`  
 Arguments: `regionName`, `region`
 
 Called just after a new region is added. Passes the region name and region as arguments.
 
 ##### `before:remove:region`  
+Callback: `onBeforeRemoveRegion`  
 Arguments: `regionName`
 
 Called just before a region is removed. The name of the region is passed as the first argument.
 
 ##### `remove:region`  
+Callback: `onRemoveRegion`  
 Arguments: `regionName`, `region`
 
 Called just after a new region is removed. Passes the region name and region as arguments.

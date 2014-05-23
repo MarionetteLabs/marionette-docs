@@ -1,2 +1,2 @@
-# Composite View  
+### Composite View  
 Extends from `Marionette.CollectionView`

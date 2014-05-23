@@ -1,83 +1,91 @@
-# Region
+### Region
 
-Views and Regions go hand-in-hand. They both are intended to solve the same goal of displaying
-content to your users. But Regions serve as a connector. A View uses its render method to create
-a DOM tree, but it isn't attached to anything.
+> The Region is a 'background Class'. Background Classes are named because you don't usually
+instantiate a Background Class by itself. Instead, other Classes extend from, or include the Background
+Class functionality into their own API. Long-story short: you shouldn't ever need to call `new BackgroundClass`.
+> To create and use Regions you are encouraged to use the Application or LayoutView API.
 
-In Marionette you use Regions to attach Views to things. They are typically used for attaching
-child views to parents, or views directly to the `document` itself.
+Views and Regions go hand-in-hand. They are both used to achieve the goal of displaying
+content to the viewers of your webapp. But Views and Regions accomplish two distinct tasks to achieve
+that goal. As you might already know, Views render the actual content that you would like to display.
+But they render that content detached from the rest of the application. Regions serve as the connector
+that *attaches* this detached DOM.
 
-### Methods
+Regions are used to link views to both parent views and to the `document` of your page itself.
 
-#### constructor( [options] )
+#### Methods
+
+##### `constructor( [options] )`
 
 Basic Controller set up. Calls initialize, if it exists. 
 
-#### initialize()
+##### `initialize()`
 
-#### ensureEl()
+##### `ensureEl()`
 
-#### getEl()
+##### `getEl()`
 
-#### show()
+##### `show()`
 
-#### attachView()
+##### `attachView()`
 
-#### open()
+##### `open()`
 
-#### reset()
+##### `reset()`
 
-#### destroy()
+##### `destroy()`
 
-#### buildRegion()
+##### `buildRegion()`
 
-#### getOption()
+##### `getOption()`
 
-#### triggerMethod()
+##### `triggerMethod()`
 
-### Properties
+#### Properties
 
-#### options
+##### `options`
 
-#### el
+##### `el`
 
 Required, or an error is thrown.
 
-#### $el
+##### `$el`
 
-#### currentView
+##### `currentView`
 
-### TriggerMethods
+#### TriggerMethods
 
 Controllers extend Backbone.Events. This gives them access to the Backbone.Events API. The following
 are the list of TriggerMethods fired by the Controller Class.
 
-#### before:show  
-Arguments: xxx
+##### `before:show`  
+Arguments: `view`
 
-xxx
+Called just before the Region displays `view` in itself.
 
-#### show  
-Arguments: xxx
+##### `show`  
+Arguments: `view`
 
-xxx
+Called just after the Region displays `view` in itself.
 
-#### before:swap  
-Arguments: xxx
+##### `before:swap`  
+Arguments: `newView`
 
-xxx
+Unlike the `show` triggerMethod this is only triggered when the Region is *already* showing a
+view, and has been told to show `newView`. It is called before the swap happens.
 
-#### swap  
-Arguments: xxx
+##### `swap`  
+Arguments: `newView`
 
-xxx
+After `newView` has replaced the previous view in the Region, then this will be called. This is only called when a swapping
+of views occurs; `show` is always called, even if the region was previously empty.
 
-#### before:destroy  
+##### `before:empty`  
 Arguments: `currentView`
 
-Called just before the current view is destroyed. Passes the about-to-be-destroyed view as an argument.
+Triggered just before the `currentView` in the region is destroyed. Passes the about-to-be-destroyed view as an argument.
 
-#### destroy  
+##### `empty`  
 Arguments: `currentView`
 
-Called just after the current view is destroyed. Passes the just-destroyed view as an argument.
+Triggered just after the `currentView` in the region is destroyed. Passes the just-destroyed view as an argument.

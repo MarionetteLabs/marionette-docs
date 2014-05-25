@@ -1,57 +1,132 @@
 ### Region
 
-> The Region is a 'background Class'. Background Classes are named because you don't usually
-instantiate a Background Class by itself. Instead, other Classes extend from, or include the Background
-Class functionality into their own API. Long-story short: you shouldn't ever need to call `new BackgroundClass`.
-> To create and use Regions you are encouraged to use the Application or LayoutView API.
+> The Region is a 'background Class'. Background Classes are named because one doesn't typically
+instantiate a Background Class. Instead, other Classes extend from, or include the Background
+Class functionality into their own API. Long-story short: you shouldn't ever need to call `new Region`.
+> Instead, to create and use Regions you are encouraged to use the Application or LayoutView API.
 
-Views and Regions go hand-in-hand. They are both used to achieve the goal of displaying
+Views and Regions go hand-in-hand. They are both used to achieve the goal of presenting
 content to the viewers of your webapp. But Views and Regions accomplish two distinct tasks to achieve
-that goal. As you might already know, Views render the actual content that you would like to display.
-But they render that content detached from the rest of the application. Regions serve as the connector
-that *attaches* this detached DOM.
+that goal.
 
-Regions are used to link views to both parent views and to the `document` of your page itself.
+As you might already know, Views render the actual content that you would like to display.
+But not all Views render content that is attached to the `document`. These views render a detached DOM
+tree, that isn't visible to the user. This creates a new responsibility: attaching that detached tree
+to another tree. This is what Regions are for: they serve as a connector between DOM trees.
 
-#### Methods
+In other words, Regions are used to attach views to parent views and also to the `document` of your page
+itself.
+
+#### Prototype Methods
+
+Prototype methods are those methods which are available on each instance of the Region.
 
 ##### `constructor( [options] )`
 
-Basic Controller set up. Calls initialize, if it exists. 
+The constructor method for the Region. It sets the `options`, `el`, and `$el` properties
+on the region. It also calls `initialize`, if it exists.
 
-##### `initialize()`
+##### `initialize( [options] )`
 
-##### `ensureEl()`
+Will be called by the `constructor` if this method exists. Like all Backbone Classes,
+this is a function that doesn't exist on the Class by default. You, the developer, are
+meant to provide it. It is where you are intended to place startup logic for your Classes.
 
-##### `getEl()`
+##### `getEl( el )`
 
-##### `show()`
+Returns the jQuery Object of `el`. Do note that it is not recommended that you override
+this method because it is ignored in certain circumstances.
 
-##### `attachView()`
+##### `show( newView [, options] )`
 
-##### `open()`
+Shows `newView` inside the region if it isn't already shown. The previous view, if one exists,
+will be destroyed in this process. The `show` methods fires the show and swap triggerMethods.
+
+You can modify the behavior of `show` by passing in an options object.
+
+`preventDestroy`  
+Pass this as `true` to prevent the destruction of the old view. This is not recommended, as Views
+are intended to be throwaway objects in Marionette. You are encouraged to only use this option
+if the View you are rendering is a render-heavy view, such as a large chart or graphic.
+
+`forceShow`  
+By default passing the same view to `show` will be a noop; your view will not be rendered, and no
+events will be fired. Pass `true` for this option to cause the entire show process to happen again,
+including events and the re-rendering of your view.
+
+##### `attachView( view )`
+
+Associate a new view with the region by setting the region's value of `currentView`. This will not call render,
+show, or fire any events.
+
+##### `attachHtml( view )`
+
+This method determines how the view's html is attached to the Region's element. The default
+method is using append. You can override this if you would like to, for instance, specify that
+the view's element fade in to view.
+
+Note that the creation of an animated region is a more involved process than just this. For more,
+refer to the guide on animated regions.
 
 ##### `reset()`
 
-##### `destroy()`
+Reset the region by calling `empty`, which destroys its view and clears its content. It then deletes
+the cached `$el` property. Finally it sets `this.el` to the value of the selector string of the old
+element.
 
-##### `buildRegion()`
+This prepares the Region to be 're-initialized' with a new element based on the old selector
+string, and is used by the LayoutView when it re-renders itself.
+
+##### `empty()`
+
+Empty calls `destroy` on the `currentView`. This has the consequence of clearing the contents
+of the Region.
 
 ##### `getOption()`
 
+Marionette's getOption helper function. It is used to get options from this class. First,
+it looks for `this.options[optionName]`, and returns it if it exists. If it doesn't exist it checks
+`this[optionName]` and returns it if it exists. And if that doesn't exist it returns undefined. For more
+refer to the getOption documentation.
+
 ##### `triggerMethod()`
+
+Marionette's triggerMethod helper function. It first fires an associated callback
+for the event, if it exists, then triggers the event on the object. For more refer
+to the triggerMethod documentation.
+
+#### Class Methods
+
+Class Methods are available from the Region Class object.
+
+##### `buildRegion( regionConfig, defaultRegionClass )`
+
+Returns a new Region from the `regionConfig` object. This is used by the RegionManager to
+create a new Region instance.
 
 #### Properties
 
 ##### `options`
 
+Like all Marionette Classes, any options passed into a Region's constructor become
+available to that Region on the `options` property.
+
 ##### `el`
 
-Required, or an error is thrown.
+Like Views, Regions have an associated element. The difference between the two, though, is that
+a Region's `el` must exist at the time that the Region is created, otherwise an error will be thrown.
+This is because the role of a Region is to manage what view is being shown in an already-existing
+element. Regions do not create new elements.
+
+Also like Views, valid values for el are a query selector string, a DOM node, or a jQuery object.
 
 ##### `$el`
 
+A cached version of the jQuery object for the Region's element.
+
 ##### `currentView`
+
+The current view that is being shown in the region.
 
 #### TriggerMethods
 
@@ -81,8 +156,8 @@ view, and has been told to show `newView`. It is called before the swap happens.
 Callback: `onSwap`  
 Arguments: `newView`
 
-After `newView` has replaced the previous view in the Region, then this will be called. This is only called when a swapping
-of views occurs; `show` is always called, even if the region was previously empty.
+After `newView` has replaced the previous view in the Region, then this will be called. Unlike the `show` triggerMethod, this is only called when a swapping
+of views occurs.
 
 ##### `before:empty`  
 Callback: `onBeforeEmpty`  

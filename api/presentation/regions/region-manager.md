@@ -55,11 +55,15 @@ Calls `empty` on each of the RegionManager's Regions.
 Prepares the RegionManager for garbage collection by removing all of its Regions and
 event listeners by calling `this.stopListening` and `this.off`.
 
-##### `triggerMethod()`
+##### `triggerMethod( eventName [, args...] )`
 
 Marionette's triggerMethod helper function. It first fires an associated callback
 for the event, if it exists, then triggers the event on the object. For more refer
 to the triggerMethod documentation.
+
+##### `extend()`
+
+Backbone's extend method. Used to construct a new Class using the RegionManager as the base.
 
 #### Properties
 

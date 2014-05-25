@@ -7,11 +7,27 @@ Applications let you do accomplish three things. Firstly, they provide a place t
 app through its Initializers. Secondly, they allow you to group your code into logical sections with the
 Module system. Lastly, they give you a way to connect `Views` to the `document` through its Regions.
 
-#### Methods
+#### Prototype Methods
 
 ##### `constructor( [options] )`
 
-The constructor function for the Application. Calls initialize, if it exists. 
+The constructor function for the Application. Calls initialize, if it exists, and sets the properties of
+the Application.
+
+Applications are unique in that their `options` are automatically attached to the Application instead of
+a separate `options` object.
+
+```js
+var app = new Marionette.Application({
+  color: '#eee'
+});
+
+// This equals #eee
+app.color;
+
+// This throws an error; options is undefined
+app.options.color;
+```
 
 ##### `addInitializer( fn )`
 
@@ -57,7 +73,7 @@ using a space-separated naming format. For instance,
 app.module('calendar.people');
 ```
 
-##### `triggerMethod()`
+##### `triggerMethod( eventName [, args...] )`
 
 Marionette's triggerMethod helper function. It first fires an associated callback for the event, if it exists,
 then triggers the event on the object. For more refer to the triggerMethod documentation.
@@ -85,14 +101,13 @@ app.vent.trigger('some:event');
 
 ##### `commands`
 
-The `Commands` from the "global" channel. Just like `vent`, Commands comes from the Wreqr library and can be used
-to dish out orders in a decoupled manner. For more I encourage you to read the Wreqr documentation.
-
-```js
-
-```
+The `Commands` from the "global" channel. Just like `vent`, Commands comes from the Wreqr library. It can be used
+to send out orders in a decoupled way. For more I encourage you to read the Wreqr documentation.
 
 ##### `reqres`
+
+The `RequestResponse` from the "global" channel. Just like `commands`, Commands comes from the Wreqr library and can be used
+to dish out orders in a decoupled manner. For more I encourage you to read the Wreqr documentation.
 
 ##### `execute( eventName [, args...] )`
 
@@ -123,20 +138,21 @@ this.request('some:request');
 #### TriggerMethods
 
 Applications extend Backbone.Events, giving them access to the Backbone.Events API. The following
-are the list of TriggerMethods fired by the Controller Class.
+are the list of TriggerMethods fired by the Application Class.
 
 ##### `before:start`  
 Callback: `onBeforeStart`  
 Arguments: `options`
 
-Called just before the Application has started. The same options passed to the initializer
-as passed onto the start triggerMethod.
+Called just before the Application is started. The same options passed to the `initialize`
+method is passed onto the before:start triggerMethod.
 
 ##### `start`  
 Callback: `onStart`  
 Arguments: `options`
 
-The complement to `before:start`; this is triggered just after the Application starts.
+The complement to `before:start`; this is triggered just after the Application starts. Receives
+the same `options` argument as the `initialize` method.
 
 ##### `before:add:region`  
 Callback: `onBeforeAddRegion`  

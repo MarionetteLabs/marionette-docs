@@ -29,8 +29,8 @@ on the region. It also calls `initialize`, if it exists.
 ##### `initialize( [options] )`
 
 Will be called by the `constructor` if this method exists. Like all Backbone Classes,
-this is a function that doesn't exist on the Class by default. You, the developer, are
-meant to provide it. It is where you are intended to place startup logic for your Classes.
+this is a function that either doesn't exist or is a noop by default. You, the developer, are
+intended to provide it. It is where you are intended to place startup logic for your Classes.
 
 ##### `getEl( el )`
 
@@ -82,18 +82,22 @@ string, and is used by the LayoutView when it re-renders itself.
 Empty calls `destroy` on the `currentView`. This has the consequence of clearing the contents
 of the Region.
 
-##### `getOption()`
+##### `getOption( optionName )`
 
 Marionette's getOption helper function. It is used to get options from this class. First,
 it looks for `this.options[optionName]`, and returns it if it exists. If it doesn't exist it checks
 `this[optionName]` and returns it if it exists. And if that doesn't exist it returns undefined. For more
 refer to the getOption documentation.
 
-##### `triggerMethod()`
+##### `triggerMethod( eventName [, args...] )`
 
 Marionette's triggerMethod helper function. It first fires an associated callback
 for the event, if it exists, then triggers the event on the object. For more refer
 to the triggerMethod documentation.
+
+##### `extend()`
+
+Backbone's extend method. Used to construct a new Class using the Region as the base.
 
 #### Class Methods
 
@@ -108,7 +112,7 @@ create a new Region instance.
 
 ##### `options`
 
-Like all Marionette Classes, any options passed into a Region's constructor become
+Like most Marionette Classes, any options passed into a Region's constructor become
 available to that Region on the `options` property.
 
 ##### `el`

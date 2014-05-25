@@ -2,8 +2,8 @@
 
 > The Region is a 'background Class'. Background Classes are named because one doesn't typically
 instantiate a Background Class. Instead, other Classes extend from, or include the Background
-Class functionality into their own API. Long-story short: you shouldn't ever need to call `new Region`.
-> Instead, to create and use Regions you are encouraged to use the Application or LayoutView API.
+Class functionality into their own API.  
+> Long-story short: you shouldn't ever need to call `new Region`. Instead, to create and use Regions you are encouraged to use the Application or LayoutView API.
 
 Views and Regions go hand-in-hand. They are both used to achieve the goal of presenting
 content to the viewers of your webapp. But Views and Regions accomplish two distinct tasks to achieve

@@ -8,22 +8,22 @@ your template.
 
 #### Prototype Methods
 
-##### constructor( templateId )
+##### `constructor( templateId )`
 
 Stores the `templateId` on the instance.
 
-##### load
+##### `load`
 
 Returns the compiled template. If the template has not been rendered it will be
 done so; otherwise it returns the cached compiled template.
 
-##### loadTemplate( templateId )
+##### `loadTemplate( templateId )`
 
 Obtains and returns the HTML from the `templateId` element, where `templateId`
 is a query selector string. If the element does not exist, or is a falsey value,
 then an Error is thrown.
 
-##### compileTemplate( rawTemplate )
+##### `compileTemplate( rawTemplate )`
 
 The method that actually does the work of compiling a template. Override this
 if you're using a templating language other than Underscore. The default method is
@@ -48,12 +48,12 @@ be cleared. Pass no arguments to clear the entire cache.
 
 #### Prototype Properties
 
-##### templateId
+##### `templateId`
 
 The query selector that points to the script tag containing your template. For
 instance, `#my-template`.
 
-##### compiledTemplate
+##### `compiledTemplate`
 
 Once the TemplateCache's template has been compiled once it is available as
 the `compiledTemplate` property.
@@ -63,7 +63,7 @@ the `compiledTemplate` property.
 These are properties that are stored directly on the `Marionette.TemplateCache`
 object. They are unavailable to instances of the TemplateCache.
 
-##### templateCaches
+##### `templateCaches`
 
 The internal store for templates.
 

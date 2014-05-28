@@ -6,7 +6,7 @@ the Backbone Router should transfer right over; the feature set is nearly identi
 difference between the two is that the AppRouter allows you to place callbacks on a separate object
 – a Controller – whereas a Backbone Router can only have callbacks that exist on the Router itself.
 
-#### Methods
+#### Prototype Methods
 
 ##### `constructor( [options] )`
 

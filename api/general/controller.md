@@ -8,7 +8,7 @@ Controllers should be used when you have a task that you would like an object to
 but none of the other Marionette Classes quite make sense to do it. It's a base object for you to use to
 create a new Class altogether.
 
-#### Methods
+#### Prototype Methods
 
 ##### `constructor( [options] )`
 

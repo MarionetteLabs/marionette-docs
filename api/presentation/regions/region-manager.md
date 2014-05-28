@@ -10,7 +10,7 @@ is included as part of Applications and LayoutViews.
 Though it is unlikely that you will ever instantiate or interact directly with a `RegionManager`,
 it can be useful to know its API to better understand the internals of the `Application` and `LayoutView`.
 
-#### Methods
+#### Prototype Methods
 
 ##### `constructor( [options] )`
 

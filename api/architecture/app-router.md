@@ -33,7 +33,7 @@ should exist.
 
 ##### `appRoutes`
 
-Like the `routes` hash, but references routes on the Controller for this router. The keys of the hash
+Similar to the `routes` hash, but references routes on the Controller for this router. The keys of the hash
 are the routes to be matched; the values of the hash are strings that must be function names on the
 Controller.
 
@@ -52,6 +52,6 @@ Triggered by the router when when the `[name]` route is matched.
 
 ##### `route`  
 Callback: onRoute
-Arguments: `route`, *params*
+Arguments: `router`, `route`, *params*
 
 Triggered by the router when whenever any route is matched.
